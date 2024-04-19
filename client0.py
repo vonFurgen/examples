@@ -1,7 +1,7 @@
 import socket
 import time
 # *** Client params ***
-server_ip = "192.168.1.8"  # It defines the server IP assigned by the router
+server_ip = "007.007.7.7"  # It defines the server IP assigned by the router
 port = 8089     # It defines the port used by the server
 client_id=0     # It defines the client ID
 
