@@ -2,7 +2,7 @@ import socket
 import queue
 import numpy as np
 # *** Server params ****
-server_ip="192.168.1.8"
+server_ip="007.007.7.7"
 port=8089
 
 ndata=4
