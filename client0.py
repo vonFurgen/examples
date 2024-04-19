@@ -1,0 +1,61 @@
+import socket
+import time
+# *** Client params ***
+server_ip = "192.168.1.8"  # It defines the server IP assigned by the router
+port = 8089     # It defines the port used by the server
+client_id=0     # It defines the client ID
+
+# *** Application variables
+ndata=4         # Total number of datasets          # Global var
+timeinterval=5  # Time interval [seconds] , datatype:integer
+class data:
+    # x: position in x axis , datatype:integer from 0 to up
+    # y: position in y axis , datatype:integer from 0 to up
+    # sval: sensor data , datatype:binary 0: nobody or 1: there is someone
+    def __init__(self,x,y,sval):  # Class constructor
+        self.pos=(x,y)
+        self.sensor=sval
+
+#def sendData(data d):
+
+def datasets():
+    sensorData=[0,1,0,0]
+    posData=[(1,2),(1,3),(2,2),(2,3)]
+    datapackage=[]
+    for i in range(ndata):
+        x,y=posData[i]
+        datapackage.append(data(x,y,sensorData[i]))
+    return datapackage
+
+
+
+# *** This function emulates the reading of sensor devices
+def emulator():
+    global arr,tick
+    time.sleep(timeinterval)
+    data=arr[tick]
+    tick+=1
+    return data
+
+def protocol(data):
+    # The client sends the datapackage according with the following structure
+    # cid:val0,pos:x:y,sen:val1
+    x,y=data.pos
+    sval=data.sensor
+    msg="cid:"+str(client_id)+",pos:"+str(x)+":"+str(y)+",sensor:"+str(sval)
+    print("Sending msg > "+msg)
+    return msg
+
+tick=0
+arr=datasets()
+#print(arr[0].pos)
+#{[1, 2], 0}; {[1, 3], 1}; {[2, 2], 0}; {[2, 3], 0}
+
+while(tick<=(ndata-1)):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((server_ip, port))
+        package=protocol(emulator())
+        #s.sendall(package)
+        s.sendall(bytes(package, 'utf-8'))
+        data = s.recv(1024)
+        print(f"Server said > {data!r}")
