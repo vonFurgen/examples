@@ -48,7 +48,7 @@ def printOM():
     global ndata
     print("Printing OM")
     for i in range(ndata):
-        print(OM[I])
+        print(OM[i])
 
 # Initialization ***
 OM = np.zeros( (4, 4) )
