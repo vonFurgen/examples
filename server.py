@@ -37,7 +37,7 @@ def decoding(msg):
 	#package=data(x,y,sval)
 	return id,x,y,sval
 
-# Desc: It updates the incoming request from the FIFO memory 
+# Desc: It updates the OM matrix (global variable) from the incoming request in the FIFO memory 
 def setOM():
 	dp=q.get()
 	(x,y)=dp.pos
