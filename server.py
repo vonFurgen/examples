@@ -22,7 +22,8 @@ class datapckg:
         self.id=idx
         self.pos=(x,y)
         self.sensor=sval
-
+	    
+# Desc: this procedure reads the incoming message and extracts the information 
 def decoding(msg):
 	recvdata=msg.split(",")
 	print("data",recvdata)
@@ -36,20 +37,24 @@ def decoding(msg):
 	#package=data(x,y,sval)
 	return id,x,y,sval
 
+# Desc: It updates the incoming request from the FIFO memory 
 def setOM():
 	dp=q.get()
 	(x,y)=dp.pos
 	OM[x][y]=dp.sensor
 
+# Desc: This procedure prints the OM matrix (this is a global variable) 
 def printOM():
     global ndata
     print("Printing OM")
     for i in range(ndata):
-        print(OM[i])
+        print(OM[I])
 
+# Initialization ***
 OM = np.zeros( (4, 4) )
 q=queue.Queue()
 
+# Desc: this procedure store the incoming information (dp variable) inside the FIFO
 def store(dp):
 	q.put(dp)
 
