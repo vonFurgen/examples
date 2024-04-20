@@ -5,7 +5,7 @@ import numpy as np
 server_ip="007.007.7.7"
 port=8089
 
-ndata=4
+ndata=4  # Number of data
 
 # *** Define the routine as a server
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
