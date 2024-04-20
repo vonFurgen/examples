@@ -36,7 +36,7 @@ def decoding(msg):
 	#package=data(x,y,sval)
 	return id,x,y,sval
 
-def setoccupancy():
+def setOM():
 	dp=q.get()
 	(x,y)=dp.pos
 	OM[x][y]=dp.sensor
@@ -62,7 +62,7 @@ while True:
     dp=datapckg(client_id,x,y,sval)
     #q.put(dp)
     store(dp)
-    setoccupancy()
+    setOM()
     printOM()
     #n=data(x,y,sval)
     print("Client "+str(client_id)+": Position :",(x,y)," Sensor :",sval)
